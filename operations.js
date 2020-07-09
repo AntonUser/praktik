@@ -1,6 +1,11 @@
 
 function addition(firstArg, secondArg) {
-    return firstArg + secondArg;
+    firstArg = Number(firstArg);
+    secondArg = Number(secondArg)
+    if (Number.isNaN(firstArg) || Number.isNaN(secondArg)) {
+        return { statusCode: 400, error: 'Один из аргументов не является числом' }
+    }
+    return { statusCode: 200, result: firstArg + secondArg };
 }
 
 function difference(firstArg, secondArg) {
@@ -51,7 +56,7 @@ function sqrt(firstArg) {
     return Math.sqrt(firstArg);
 }
 module.exports = {
-    addition: addition,
+    addition,
     difference: difference,
     multiplication: multiplication,
     division: division,

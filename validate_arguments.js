@@ -1,14 +1,5 @@
 const operation = require("./operations.js");
 
-function validateAdd(firstArg, secondArg) {
-
-    if (typeof (firstArg + secondArg) === "string") {
-        return "Ошибка! Один из аргументов не число";
-    }
-    return operation.addition(firstArg, secondArg);
-
-}
-
 function validateDiff(firstArg, secondArg) {
 
     if (typeof (firstArg + secondArg) === "string") {
@@ -149,7 +140,6 @@ function validateSqr(firstArg) {
 }
 
 module.exports = {
-    validateAdd: validateAdd,
     validateDiff: validateDiff,
     validateDiv: validateDiv,
     validateMul: validateMul,

@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const valid = require("./validate_arguments.js");
+const operations = require("./operations");
 // создаем объект приложения
 const app = express();
 // Подключаем body-parser
@@ -13,7 +14,8 @@ app.post("/", function (request, response) {
     const { firstArg, secondArg, operation } = request.body; // деструктуризация
 
     if (operation === '+') {
-        response.status(200).json(valid.validateAdd(firstArg, secondArg));
+        const { statusCode, result, error } = operations.addition(firstArg, secondArg);
+        response.status(statusCode).json(result || error);
     } else if (operation === '-') {
         response.status(200).json(valid.validateDiff(firstArg, secondArg));
     } else if (operation === '/') {
