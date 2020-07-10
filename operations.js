@@ -1,72 +1,150 @@
 
 function addition(firstArg, secondArg) {
     firstArg = Number(firstArg);
-    secondArg = Number(secondArg)
+    secondArg = Number(secondArg);
     if (Number.isNaN(firstArg) || Number.isNaN(secondArg)) {
-        return { statusCode: 400, error: 'Один из аргументов не является числом' }
+        return { statusCode: 400, error: 'Один из аргументов не является числом' };
     }
     return { statusCode: 200, result: firstArg + secondArg };
 }
 
 function difference(firstArg, secondArg) {
-    return firstArg - secondArg;
+    firstArg = Number(firstArg);
+    secondArg = Number(secondArg);
+    if (Number.isNaN(firstArg) || Number.isNaN(secondArg)) {
+        return { statusCode: 400, error: 'Один из аргументов не является числом' };
+    }
+    return { statusCode: 200, result: firstArg - secondArg };
 }
 
 function multiplication(firstArg, secondArg) {
-    return firstArg * secondArg;
+    firstArg = Number(firstArg);
+    secondArg = Number(secondArg);
+    if (Number.isNaN(firstArg) || Number.isNaN(secondArg)) {
+        return { statusCode: 400, error: 'Один из аргументов не является числом' };
+    }
+    return { statusCode: 200, result: firstArg * secondArg };
 }
 
 function division(firstArg, secondArg) {
-    return firstArg / secondArg;
+    firstArg = Number(firstArg);
+    secondArg = Number(secondArg);
+    if (Number.isNaN(firstArg) || Number.isNaN(secondArg)) {
+        return { statusCode: 400, error: 'Один из аргументов не является числом' };
+    }
+    else if (secondArg === 0) {
+        return { statusCode: 400, error: 'Деление на ноль невозможно' };
+    }
+    return { statusCode: 200, result: firstArg / secondArg };
 }
 
 function power(firstArg, secondArg) {
-    return Math.pow(firstArg, secondArg);
+    firstArg = Number(firstArg);
+    secondArg = Number(secondArg);
+    if (Number.isNaN(firstArg) || Number.isNaN(secondArg)) {
+        return { statusCode: 400, error: 'Один из аргументов не является числом' };
+    }
+    return { statusCode: 200, result: Math.pow(firstArg, secondArg) };
 }
 
-function sinusDeg(firstArg) {
-    return Math.sin(firstArg * Math.PI / 180);
+function sinus(firstArg, unit) {
+    firstArg = Number(firstArg);
+    if (Number.isNaN(firstArg)) {
+        return { statusCode: 400, error: 'Аргумент не является числом' };
+    }
+    if (unit === 'deg') {//в градусах
+        return { statusCode: 200, result: Math.sin(firstArg * Math.PI / 180) };
+    } else {//в радианах
+        return { statusCode: 200, result: Math.sin(firstArg) };
+    }
 }
 
-function sinusRad(firstArg) {
-    return Math.sin(firstArg);
+function cosinus(firstArg, unit) {
+    firstArg = Number(firstArg);
+    if (Number.isNaN(firstArg)) {
+        return { statusCode: 400, error: 'Аргумент не является числом' };
+    }
+    if (unit === 'deg') {//в градусах
+        return { statusCode: 200, result: Math.cos(firstArg * Math.PI / 180) };
+    } else {//в радианах
+        return { statusCode: 200, result: Math.cos(firstArg) };
+    }
 }
 
-function cosinusDeg(firstArg) {
-    return Math.cos(firstArg * Math.PI / 180);
+function tangens(firstArg, unit) {
+
+    firstArg = Number(firstArg);
+    if (Number.isNaN(firstArg)) {
+        return { statusCode: 400, error: 'Аргумент не является числом' };
+    }
+
+    if (unit === 'deg') {//в градусах
+
+        if (firstArg === 90 || firstArg === 270) {//валидация исходного значения
+            return { statusCode: 400, error: 'Для заданного угла тангенс отсутствует' };
+        }
+        return { statusCode: 200, result: Math.tan(firstArg * Math.PI / 180) };
+
+    } else {//в радианах
+
+        if (firstArg === (Math.PI / 2) || firstArg === (3 * Math.PI / 2)) {//валидация исходного значения
+            return { statusCode: 400, error: 'Для заданного угла тангенс отсутствует' };
+        }
+        return { statusCode: 200, result: Math.tan(firstArg) };
+
+    }
 }
 
-function cosinusRad(firstArg) {
-    return Math.cos(firstArg);
-}
+function cotangens(firstArg, unit) {
+    firstArg = Number(firstArg);
+    if (Number.isNaN(firstArg)) {
+        return { statusCode: 400, error: 'Аргумент не является числом' };
+    }
+    if (unit === 'deg') {//в градусах
 
-function tangensDeg(firstArg) {
-    return Math.tan(firstArg * Math.PI / 180);
-}
+        if (firstArg === 90 || firstArg === 270) {//валидация исходного значения
+            return { statusCode: 400, error: 'Для заданного угла тангенс отсутствует' };
+        }
+        return { statusCode: 200, result: 1 / Math.tan(firstArg * Math.PI / 180) };
 
-function tangensRad(firstArg) {
-    return Math.tan(firstArg);
+    } else {//в радианах
+
+        if (firstArg === (Math.PI / 2) || firstArg === (3 * Math.PI / 2)) {//валидация исходного значения
+            return { statusCode: 400, error: 'Для заданного угла тангенс отсутствует' };
+        }
+        return { statusCode: 200, result: 1 / Math.tan(firstArg) };
+
+    }
 }
 
 function percent(firstArg, secondArg) {
-    return firstArg * secondArg / 100;
+    firstArg = Number(firstArg);
+    secondArg = Number(secondArg);
+    if (Number.isNaN(firstArg) || Number.isNaN(secondArg)) {
+        return { statusCode: 400, error: 'Один из аргументов не является числом' };
+    } else if (secondArg < 0 || secondArg > 100) {
+        return { statusCode: 400, error: 'Процент выходит за границы допустимых значений' };
+    }
+    return { statusCode: 200, result: firstArg * secondArg / 100 };
 }
 
 function sqrt(firstArg) {
-    return Math.sqrt(firstArg);
+    firstArg = Number(firstArg);
+    if (Number.isNaN(firstArg)) {
+        return { statusCode: 400, error: 'Аргумент не является числом' };
+    }
+    return { statusCode: 200, result: Math.sqrt(firstArg) };
 }
 module.exports = {
     addition,
-    difference: difference,
-    multiplication: multiplication,
-    division: division,
-    power: power,
-    sinusDeg: sinusDeg,
-    sinusRad: sinusRad,
-    cosinusDeg: cosinusDeg,
-    cosinusRad: cosinusRad,
-    tangensDeg: tangensDeg,
-    tangensRad: tangensRad,
-    percent: percent,
-    sqrt: sqrt
+    difference,
+    multiplication,
+    division,
+    power,
+    sinus,
+    cosinus,
+    tangens,
+    cotangens,
+    percent,
+    sqrt
 };
