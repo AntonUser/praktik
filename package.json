@@ -4,9 +4,9 @@
   "description": "lesson 1",
   "main": "index.js",
   "scripts": {
-    "start": "node start.js",
+    "start": "nodemon start.js",
     "test": "jest",
-     "coverage": "jest --coverage" 
+    "coverage": "jest --coverage"
   },
   "keywords": [
     "lesson",

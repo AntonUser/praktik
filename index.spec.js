@@ -3,7 +3,7 @@ const supertest = require('supertest');
 const request = supertest(index);
 
 describe('API', () => {
-    it('Sum request', () => {
+    it('Sum request error', () => {
         return request
             .post('/')
             .send(
@@ -20,7 +20,24 @@ describe('API', () => {
             });
     });
 
-    it('Dif request', () => {
+    it('Sum request with normal arguments', () => {
+        return request
+            .post('/')
+            .send(
+                {
+                    firstArg: 1,
+                    secondArg: "8",
+                    operation: "+"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(9);
+            });
+    });
+
+    it('Dif request error', () => {
         return request
             .post('/')
             .send(
@@ -37,7 +54,24 @@ describe('API', () => {
             });
     });
 
-    it('Mul request', () => {
+    it('Dif request with normal arguments', () => {
+        return request
+            .post('/')
+            .send(
+                {
+                    firstArg: 20,
+                    secondArg: "6",
+                    operation: "-"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(14);
+            });
+    });
+
+    it('Mul request error', () => {
         return request
             .post('/')
             .send(
@@ -54,7 +88,24 @@ describe('API', () => {
             });
     });
 
-    it('Div request', () => {
+    it('Mul request with normal arguments', () => {
+        return request
+            .post('/')
+            .send(
+                {
+                    firstArg: 8,
+                    secondArg: "8",
+                    operation: "*"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(64);
+            });
+    });
+
+    it('Div request error', () => {
         return request
             .post('/')
             .send(
@@ -71,7 +122,7 @@ describe('API', () => {
             });
     });
 
-    it('Div request zero', () => {
+    it('Div request zero error', () => {
         return request
             .post('/')
             .send(
@@ -88,7 +139,24 @@ describe('API', () => {
             });
     });
 
-    it('Pow request', () => {
+    it('Div request with normal arguments', () => {
+        return request
+            .post('/')
+            .send(
+                {
+                    firstArg: 72,
+                    secondArg: "8",
+                    operation: "/"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(9);
+            });
+    });
+
+    it('Pow request error', () => {
         return request
             .post('/')
             .send(
@@ -105,7 +173,24 @@ describe('API', () => {
             });
     });
 
-    it('Per request', () => {
+    it('Pow request with normal arguments', () => {
+        return request
+            .post('/')
+            .send(
+                {
+                    firstArg: "4",
+                    secondArg: "3",
+                    operation: "pow"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(64);
+            });
+    });
+
+    it('Per request error', () => {
         return request
             .post('/')
             .send(
@@ -122,7 +207,24 @@ describe('API', () => {
             });
     });
 
-    it('Per border request', () => {
+    it('Per request with normal arguments', () => {
+        return request
+            .post('/')
+            .send(
+                {
+                    firstArg: "100",
+                    secondArg: 40,
+                    operation: "per"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(40);
+            });
+    });
+
+    it('Per border error', () => {
         return request
             .post('/')
             .send(
@@ -156,7 +258,7 @@ describe('API', () => {
             });
     });
 
-    it('Sin request', () => {
+    it('Sin request error', () => {
         return request
             .post('/trigonometry')
             .send(
@@ -173,7 +275,41 @@ describe('API', () => {
             });
     });
 
-    it('Cos request', () => {
+    it('Sin request with normal arguments deg', () => {
+        return request
+            .post('/trigonometry')
+            .send(
+                {
+                    firstArg: 30,
+                    unit: "deg",
+                    operation: "sin"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(0.49999999999999994);
+            });
+    });
+
+    it('Sin request with normal arguments rad', () => {
+        return request
+            .post('/trigonometry')
+            .send(
+                {
+                    firstArg: 60,
+                    unit: "",
+                    operation: "sin"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(-0.3048106211022167);
+            });
+    });
+
+    it('Cos request error', () => {
         return request
             .post('/trigonometry')
             .send(
@@ -190,7 +326,41 @@ describe('API', () => {
             });
     });
 
-    it('Tan request', () => {
+    it('Cos request with normal arguments deg', () => {
+        return request
+            .post('/trigonometry')
+            .send(
+                {
+                    firstArg: 60,
+                    unit: "deg",
+                    operation: "cos"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(0.5000000000000001);
+            });
+    });
+
+    it('Cos request with normal arguments rad', () => {
+        return request
+            .post('/trigonometry')
+            .send(
+                {
+                    firstArg: 60,
+                    unit: "",
+                    operation: "cos"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(-0.9524129804151563);
+            });
+    });
+
+    it('Tan request error', () => {
         return request
             .post('/trigonometry')
             .send(
@@ -207,7 +377,41 @@ describe('API', () => {
             });
     });
 
-    it('Tan forbidden angle', () => {
+    it('Tan request with normal argument deg', () => {
+        return request
+            .post('/trigonometry')
+            .send(
+                {
+                    firstArg: 45,
+                    unit: "deg",
+                    operation: "tan"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(0.9999999999999999);
+            });
+    });
+
+    it('Tan request with normal argument rad', () => {
+        return request
+            .post('/trigonometry')
+            .send(
+                {
+                    firstArg: 45,
+                    unit: "",
+                    operation: "tan"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(1.6197751905438615);
+            });
+    });
+
+    it('Tan forbidden angle deg', () => {
         return request
             .post('/trigonometry')
             .send(
@@ -224,12 +428,12 @@ describe('API', () => {
             });
     });
 
-    it('Tan forbidden angle', () => {
+    it('Tan forbidden angle rad', () => {
         return request
             .post('/trigonometry')
             .send(
                 {
-                    firstArg: Math.PI/2,
+                    firstArg: Math.PI / 2,
                     unit: "",
                     operation: "tan"
                 }
@@ -241,7 +445,7 @@ describe('API', () => {
             });
     });
 
-    it('Ctan request', () => {
+    it('Ctan request error', () => {
         return request
             .post('/trigonometry')
             .send(
@@ -258,7 +462,41 @@ describe('API', () => {
             });
     });
 
-    it('Ctan forbidden angle', () => {
+    it('Ctan request with normal arguments deg', () => {
+        return request
+            .post('/trigonometry')
+            .send(
+                {
+                    firstArg: "45",
+                    unit: "deg",
+                    operation: "ctan"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(1.0000000000000002);
+            });
+    });
+
+    it('Ctan request with normal arguments rad', () => {
+        return request
+            .post('/trigonometry')
+            .send(
+                {
+                    firstArg: "45",
+                    unit: "",
+                    operation: "ctan"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(0.6173696237835551);
+            });
+    });
+
+    it('Ctan forbidden angle deg', () => {
         return request
             .post('/trigonometry')
             .send(
@@ -275,7 +513,7 @@ describe('API', () => {
             });
     });
 
-    it('Ctan forbidden angle', () => {
+    it('Ctan forbidden angle rad', () => {
         return request
             .post('/trigonometry')
             .send(
@@ -309,24 +547,7 @@ describe('API', () => {
             });
     });
 
-    it('Operation not found for /trigonometry', () => {
-        return request
-            .post('/trigonometry')
-            .send(
-                {
-                    firstArg: "5",
-                    unit: "8",
-                    operation: "san"
-                }
-            )
-            .expect('Content-type', /json/)
-            .expect(400)
-            .then(response => {
-                expect(response.body).toBe('Заданной операции не существует');
-            });
-    });
-
-    it('Sqrt request', () => {
+    it('Sqrt request error', () => {
         return request
             .post('/oneArg')
             .send(
@@ -342,7 +563,23 @@ describe('API', () => {
             });
     });
 
-    it('Sqr request', () => {
+    it('Sqrt request with normal argument', () => {
+        return request
+            .post('/oneArg')
+            .send(
+                {
+                    firstArg: "81",
+                    operation: "sqrt"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(9);
+            });
+    });
+
+    it('Sqr request error', () => {
         return request
             .post('/oneArg')
             .send(
@@ -355,6 +592,22 @@ describe('API', () => {
             .expect(400)
             .then(response => {
                 expect(response.body).toBe('Аргумент не является числом');
+            });
+    });
+
+    it('Sqr request with normal', () => {
+        return request
+            .post('/oneArg')
+            .send(
+                {
+                    firstArg: 4,
+                    operation: "sqr"
+                }
+            )
+            .expect('Content-type', /json/)
+            .expect(200)
+            .then(response => {
+                expect(response.body).toBe(16);
             });
     });
 
