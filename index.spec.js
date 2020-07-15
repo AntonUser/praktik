@@ -1,8 +1,8 @@
-const app = require('./index');
+const index = require('./index');
 const supertest = require('supertest');
-const request = supertest(app);
+const request = supertest(index);
 
-describe('Two-arguments', () => {
+describe('API', () => {
     it('Sum request', () => {
         return request
             .post('/')
@@ -19,9 +19,7 @@ describe('Two-arguments', () => {
                 expect(response.body).toBe('Один из аргументов не является числом');
             });
     });
-});
 
-describe('Two-arguments', () => {
     it('Dif request', () => {
         return request
             .post('/')
@@ -38,9 +36,7 @@ describe('Two-arguments', () => {
                 expect(response.body).toBe('Один из аргументов не является числом');
             });
     });
-});
 
-describe('Two-arguments', () => {
     it('Mul request', () => {
         return request
             .post('/')
@@ -57,9 +53,7 @@ describe('Two-arguments', () => {
                 expect(response.body).toBe('Один из аргументов не является числом');
             });
     });
-});
 
-describe('Two-arguments', () => {
     it('Div request', () => {
         return request
             .post('/')
@@ -76,9 +70,7 @@ describe('Two-arguments', () => {
                 expect(response.body).toBe('Один из аргументов не является числом');
             });
     });
-});
 
-describe('Two-arguments', () => {
     it('Div request zero', () => {
         return request
             .post('/')
@@ -95,9 +87,7 @@ describe('Two-arguments', () => {
                 expect(response.body).toBe('Деление на ноль невозможно');
             });
     });
-});
 
-describe('Two-arguments', () => {
     it('Pow request', () => {
         return request
             .post('/')
@@ -114,9 +104,7 @@ describe('Two-arguments', () => {
                 expect(response.body).toBe('Один из аргументов не является числом');
             });
     });
-});
 
-describe('Two-arguments', () => {
     it('Per request', () => {
         return request
             .post('/')
@@ -133,9 +121,7 @@ describe('Two-arguments', () => {
                 expect(response.body).toBe('Один из аргументов не является числом');
             });
     });
-});
 
-describe('Two-arguments', () => {
     it('Per border request', () => {
         return request
             .post('/')
@@ -152,9 +138,7 @@ describe('Two-arguments', () => {
                 expect(response.body).toBe('Процент выходит за границы допустимых значений');
             });
     });
-});
 
-describe('Two-arguments', () => {
     it('Operation not found for /', () => {
         return request
             .post('/')
@@ -171,9 +155,7 @@ describe('Two-arguments', () => {
                 expect(response.body).toBe('Заданной операции не существует');
             });
     });
-});
 
-describe('Trigonometry', () => {
     it('Sin request', () => {
         return request
             .post('/trigonometry')
@@ -190,9 +172,7 @@ describe('Trigonometry', () => {
                 expect(response.body).toBe('Аргумент не является числом');
             });
     });
-});
 
-describe('Trigonometry', () => {
     it('Cos request', () => {
         return request
             .post('/trigonometry')
@@ -209,9 +189,7 @@ describe('Trigonometry', () => {
                 expect(response.body).toBe('Аргумент не является числом');
             });
     });
-});
 
-describe('Trigonometry', () => {
     it('Tan request', () => {
         return request
             .post('/trigonometry')
@@ -228,9 +206,7 @@ describe('Trigonometry', () => {
                 expect(response.body).toBe('Аргумент не является числом');
             });
     });
-});
 
-describe('Trigonometry', () => {
     it('Tan forbidden angle', () => {
         return request
             .post('/trigonometry')
@@ -247,9 +223,7 @@ describe('Trigonometry', () => {
                 expect(response.body).toBe('Для заданного угла тангенс отсутствует');
             });
     });
-});
 
-describe('Trigonometry', () => {
     it('Tan forbidden angle', () => {
         return request
             .post('/trigonometry')
@@ -266,9 +240,7 @@ describe('Trigonometry', () => {
                 expect(response.body).toBe('Для заданного угла тангенс отсутствует');
             });
     });
-});
 
-describe('Trigonometry', () => {
     it('Ctan request', () => {
         return request
             .post('/trigonometry')
@@ -285,9 +257,7 @@ describe('Trigonometry', () => {
                 expect(response.body).toBe('Аргумент не является числом');
             });
     });
-});
 
-describe('Trigonometry', () => {
     it('Ctan forbidden angle', () => {
         return request
             .post('/trigonometry')
@@ -304,9 +274,7 @@ describe('Trigonometry', () => {
                 expect(response.body).toBe('Для заданного угла тангенс отсутствует');
             });
     });
-});
 
-describe('Trigonometry', () => {
     it('Ctan forbidden angle', () => {
         return request
             .post('/trigonometry')
@@ -323,9 +291,7 @@ describe('Trigonometry', () => {
                 expect(response.body).toBe('Для заданного угла тангенс отсутствует');
             });
     });
-});
 
-describe('Trigonometry', () => {
     it('Operation not found for /trigonometry', () => {
         return request
             .post('/trigonometry')
@@ -342,9 +308,7 @@ describe('Trigonometry', () => {
                 expect(response.body).toBe('Заданной операции не существует');
             });
     });
-});
 
-describe('Trigonometry', () => {
     it('Operation not found for /trigonometry', () => {
         return request
             .post('/trigonometry')
@@ -361,9 +325,7 @@ describe('Trigonometry', () => {
                 expect(response.body).toBe('Заданной операции не существует');
             });
     });
-});
 
-describe('One-arguments', () => {
     it('Sqrt request', () => {
         return request
             .post('/oneArg')
@@ -379,9 +341,7 @@ describe('One-arguments', () => {
                 expect(response.body).toBe('Аргумент не является числом');
             });
     });
-});
 
-describe('One-arguments', () => {
     it('Sqr request', () => {
         return request
             .post('/oneArg')
@@ -397,9 +357,7 @@ describe('One-arguments', () => {
                 expect(response.body).toBe('Аргумент не является числом');
             });
     });
-});
 
-describe('One-arguments', () => {
     it('Operation not found for /one-arguments', () => {
         return request
             .post('/oneArg')
