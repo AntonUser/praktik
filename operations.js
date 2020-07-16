@@ -102,14 +102,14 @@ function cotangens(firstArg, unit) {
     }
     if (unit === 'deg') {//в градусах
 
-        if (firstArg === 90 || firstArg === 270) {//валидация исходного значения
+        if (firstArg === 0 || firstArg === 180 || firstArg === 360) {//валидация исходного значения
             return { statusCode: 400, error: 'Для заданного угла тангенс отсутствует' };
         }
         return { statusCode: 200, result: 1 / Math.tan(firstArg * Math.PI / 180) };
 
     } else {//в радианах
 
-        if (firstArg === (Math.PI / 2) || firstArg === (3 * Math.PI / 2)) {//валидация исходного значения
+        if (firstArg === 0 || firstArg === Math.PI || firstArg === 2 * Math.PI) {//валидация исходного значения
             return { statusCode: 400, error: 'Для заданного угла тангенс отсутствует' };
         }
         return { statusCode: 200, result: 1 / Math.tan(firstArg) };
