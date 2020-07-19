@@ -2,16 +2,20 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const operations = require("./operations");
+
 // создаем объект приложения
 const app = express();
 // Подключаем body-parser
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
+app.get("/", (request, response) => {
+    response.sendFile(__dirname + '/public/calculator_320px.html');
+});
 
 // Определяем обработчик корневого урла с методом POST
 app.post("/", function (request, response) {
 
     const { firstArg, secondArg, operation } = request.body; // деструктуризация
-
     if (operation === '+') {
         const { statusCode, result, error } = operations.addition(firstArg, secondArg);
         response.status(statusCode).json(result || error);
