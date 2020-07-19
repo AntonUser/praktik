@@ -1,4 +1,3 @@
-// подключение express
 const express = require("express");
 const bodyParser = require('body-parser');
 const operations = require("./operations");
@@ -7,15 +6,16 @@ const operations = require("./operations");
 const app = express();
 // Подключаем body-parser
 app.use(express.static(__dirname + '/public'));
+
 app.use(bodyParser.json());
 app.get("/", (request, response) => {
     response.sendFile(__dirname + '/public/calculator_320px.html');
 });
 
-// Определяем обработчик корневого урла с методом POST
 app.post("/", function (request, response) {
 
-    const { firstArg, secondArg, operation } = request.body; // деструктуризация
+  const { firstArg, secondArg, operation } = request.body;
+
     if (operation === '+') {
         const { statusCode, result, error } = operations.addition(firstArg, secondArg);
         response.status(statusCode).json(result || error);
@@ -31,14 +31,13 @@ app.post("/", function (request, response) {
     } else if (operation === 'pow') {
         const { statusCode, result, error } = operations.power(firstArg, secondArg);
         response.status(statusCode).json(result || error);
-    } else if (operation === 'per') {//процент
+    } else if (operation === 'per') {
         const { statusCode, result, error } = operations.percent(firstArg, secondArg);
         response.status(statusCode).json(result || error);
     } else {
         response.status(400).json('Заданной операции не существует');
     }
 });
-
 
 app.post("/trigonometry", function (request, response) {
     const { firstArg, unit, operation } = request.body;
@@ -65,11 +64,12 @@ app.post("/oneArg", function (request, response) {
         const { statusCode, result, error } = operations.sqrt(firstArg);
         response.status(statusCode).json(result || error);
     } else if (operation === 'sqr') {
-        const { statusCode, result, error } = operations.power(firstArg, 2);//возведение в квадрат
-        response.status(statusCode).json(result || error);
+        const { statusCode, result, error } = operations.power(firstArg, 2);
+        response.status(statusCode).json(result || 'Аргумент не является числом');
     } else {
         response.status(400).json('Заданной операции не существует');
     }
 });
-// начинаем прослушивать подключения на 3000 порту
+module.exports = app;
+
 app.listen(3001);
