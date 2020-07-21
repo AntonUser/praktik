@@ -72,75 +72,92 @@
     </script>
 
     <form name="calculator">
-        <div class="textfieldscontainer" style="margin-top: 20%;">
+        <div class="textfieldscontainer" style="margin-top: 15%;">
             <input type="textfield" name="firstArg" value="" class="sizetextfield btn btn-outline-danger "
                 placeholder="first arg">
             <input type="textfield" name="secondArg" value="" class="sizetextfield btn btn-outline-danger "
                 placeholder="second arg">
         </div>
         <div class="textfieldscontainer">
-            <input type="textfield" name="result" id="result" value="" class="btn btn-outline-danger "
-                placeholder="result" style="width: 250px; height: 35px;">
+            <textarea placeholder="result" name="result" id="result" class="btn btn-outline-danger"
+                style="width: 350px; height: 70px;"></textarea>
         </div>
         <div class="container">
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn bt-red button-size">
-                    <input type="radio" name="oper" id="+" value="+" autocomplete="off">+
-                </label>
-                <label class="btn bt-red button-size">
-                    <input type="radio" name="oper" id="-" autocomplete="off" value="-">-
-                </label>
-                <label class="btn bt-red button-size">
-                    <input type="radio" name="oper" id="*" autocomplete="off" value="*">*
-                </label>
-                <label class="btn bt-red button-size">
-                    <input type="radio" name="oper" id="/" autocomplete="off" value="/">/
-                </label>
-                <label class="btn bt-red button-size">
-                    <input type="radio" name="oper" id="per" autocomplete="off" value="per">%
-                </label>
-            </div>
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn bt-red button-size">
-                    <input type="radio" name="oper" id="sin" autocomplete="off" value="sin">sin
-                </label>
-                <label class="btn bt-red button-size">
-                    <input type="radio" name="oper" id="cos" autocomplete="off" value="cos">cos
-                </label>
-                <label class="btn bt-red button-size">
-                    <input type="radio" name="oper" id="tan" autocomplete="off" value="tan">tan
-                </label>
-                <label class="btn bt-red button-size">
-                    <input type="radio" name="oper" id="ctan" autocomplete="off" value="ctan">ctan
-                </label>
-            </div>
-            <div id="secondcolumn">
-                <input type="reset" value="CE" class="btn btn-outline-danger button-size">
-                <div class="btn-group btn-group-toggle" data-toggle="buttons" id="drcokumn">
-                    <label class="btn bt-red button-size">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-toggle" role="group">
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="+" autocomplete="off" value="+">+
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="-" autocomplete="off" value="-">-
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="*" autocomplete="off" value="*">*
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="/" autocomplete="off" value="/">/
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="per" autocomplete="off" value="per">%
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
                         <input type="radio" name="oper" id="pow" autocomplete="off" value="pow">x<sup>y</sup>
                     </label>
-                    <label class="btn bt-red button-size">
-                        <input type="radio" name="oper" id="sqrt" autocomplete="off" value="sqrt">√
-                    </label>
-                    <label class="btn bt-red button-size">
+                    <label class="btn btn-outline-danger button-size center">
                         <input type="radio" name="oper" id="sqr" autocomplete="off" value="sqr">x<sup>2</sup>
                     </label>
                 </div>
-                <div id="fourthcolumn">
-                    <input type="button" value="=" class="btn btn-outline-danger button-size" onclick="fun1()">
+                <div id="two-string">
+                    <div class="btn-group btn-group-toggle" role="group" id="trigon">
+                        <label class="btn btn-outline-danger button-size center">
+                            <input type="radio" name="oper" id="sin" autocomplete="off" value="sin">sin
+                        </label>
+                        <label class="btn btn-outline-danger button-size center">
+                            <input type="radio" name="oper" id="cos" autocomplete="off" value="cos">cos
+                        </label>
+                        <label class="btn btn-outline-danger button-size center">
+                            <input type="radio" name="oper" id="tan" autocomplete="off" value="tan">tan
+                        </label>
+                        <label class="btn btn-outline-danger button-size center">
+                            <input type="radio" name="oper" id="ctan" autocomplete="off" value="ctan">ctan
+                        </label>
+                        <label class="btn btn-outline-danger button-size center">
+                            <input type="radio" name="oper" id="sqrt" autocomplete="off" value="sqrt">√
+                        </label>
+                    </div>
+                    <div id="secondcolumn">
+                        <input type="reset" id="CE" value="CE" class="btn btn-outline-danger button-size">
+                        <input type="button" value="=" class="btn btn-outline-danger button-size" onclick="fun1()">
+                    </div>
                 </div>
             </div>
-
-            <div class="toggle-button-cover">
-                <div class="button r" id="button-3">
-                    <input type="checkbox" class="checkbox" id="checkbox" name="checkbox">
-                    <div class="knobs"></div>
-                    <div class="layer"></div>
-                </div>
+            <div id="toggle-metric" class="mt-2">
+                <h5 id="deg">DEG</h5>
+                <label class="switch" id="sw">
+                    <input type="checkbox" id="checkbox">
+                    <span class="slider" style="margin-top: -2px;"></span>
+                </label>
+                <h5 id="rad">RAD</h5>
             </div>
-            
         </div>
+
+        <script>
+            $('#sw').click(function () {
+                if (!$('#checkbox').is(':checked')) {
+                    $('#deg').css({ "color": "#dc3545" });
+                    $('#rad').css({ "color": "#808080" });
+                } else {
+                    $('#rad').css({ "color": "#dc3545" });
+                    $('#deg').css({ "color": "#808080" });
+                }
+            });
+
+            $('#CE').click(function () {
+                $('#deg').css({ "color": "#dc3545" });
+                $('#rad').css({ "color": "#808080" });
+            });
+        </script>
     </form>
 </body>
+
 </html>
