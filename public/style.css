@@ -1,0 +1,109 @@
+#rad {
+    margin-top: 3px;
+    margin-left: 2px;
+    color: #808080;
+}
+
+#deg {
+    margin-top: 3px;
+    margin-right: 2px;
+    color: #dc3545;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 34px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #343a40;
+    border-color: #dc3545;
+    border-style: solid;
+    border-width: 1px;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #dc3545;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(65px);
+    -ms-transform: translateX(65px);
+    transform: translateX(65px);
+}
+
+.button-size {
+    width: 50px;
+    height: 50px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#secondcolumn, #drcokumn, #fourthcolumn {
+    display: flex;
+    flex-direction: row;
+}
+
+.container {
+    display: flex;
+    align-content: space-between;
+    justify-content: center;
+    width: 200px;
+    flex-wrap: wrap;
+}
+
+.textfieldscontainer {
+    display: flex;
+    justify-content: center
+}
+
+#toggle-metric {
+    display: flex;
+    flex-direction: row;
+}
+
+#result {
+    display: flex;
+}
+
+.sizetextfield {
+    width: 175px;
+    height: 35px;
+}
+
+#two-string {
+    display: flex;
+    flex-direction: row;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#trigon, #secondcolumn{
+    display: flex;
+    flex-direction: row;
+}

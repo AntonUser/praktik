@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-dark">
+
+    <script>
+        alert("Инструкция:\n -Для выполнения опреаций с двумя аргументами (+,-,*,/,возведение в степень, процент) заполните поля first arg и second arg, кликните по нужной операции и нажмите '=', в поле result появится результат\n-Для всех остальных операций нужно заполнять только first arg, ход остальных манипуляций такой же как и в первом случае\nТак же для тригонометрических операций есть возможность выбора нужной метрики(радианы/градусы)")
+        async function fun1() {
+            let valueOperation = $('input[name="oper"]:checked').val();
+            if (valueOperation === 'sin' || valueOperation === 'cos' || valueOperation === 'tan' || valueOperation === 'ctan') {
+                let u;
+                if (!$('#checkbox').is(':checked')) {
+                    u = 'deg'
+                } else {
+                    u = 'rad'
+                }
+
+                var strJson = {//обект с данными из формы
+                    firstArg: $('input[name="firstArg"]').val(),
+                    unit: u,
+                    operation: valueOperation
+                };
+                query('http://localhost:3001/trigonometry', strJson);
+
+
+            } else if (valueOperation === 'sqrt' || valueOperation === 'sqr') {
+                var strJson = {//обект с данными из формы
+                    firstArg: $('input[name="firstArg"]').val(),
+                    operation: valueOperation,
+                };
+                query('http://localhost:3001/oneArg', strJson);
+            } else {
+                var strJson = {//обект с данными из формы
+                    firstArg: $('input[name="firstArg"]').val(),
+                    secondArg: $('input[name="secondArg"]').val(),
+                    operation: valueOperation
+                };
+                query('http://localhost:3001/', strJson);
+            }
+        }
+
+        async function query(url, bodyRequest) {
+            const result = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyRequest)
+            });
+            let json = await result.json();
+            $("#result").val(json);
+        }
+    </script>
+
+    <form name="calculator">
+        <div class="textfieldscontainer" style="margin-top: 15%;">
+            <input type="textfield" name="firstArg" value="" class="sizetextfield btn btn-outline-danger "
+                placeholder="first arg">
+            <input type="textfield" name="secondArg" value="" class="sizetextfield btn btn-outline-danger "
+                placeholder="second arg">
+        </div>
+        <div class="textfieldscontainer">
+            <textarea placeholder="result" name="result" id="result" class="btn btn-outline-danger"
+                style="width: 350px; height: 70px;"></textarea>
+        </div>
+        <div class="container">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group btn-group-toggle" role="group">
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="+" autocomplete="off" value="+">+
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="-" autocomplete="off" value="-">-
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="*" autocomplete="off" value="*">*
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="/" autocomplete="off" value="/">/
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="per" autocomplete="off" value="per">%
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="pow" autocomplete="off" value="pow">x<sup>y</sup>
+                    </label>
+                    <label class="btn btn-outline-danger button-size center">
+                        <input type="radio" name="oper" id="sqr" autocomplete="off" value="sqr">x<sup>2</sup>
+                    </label>
+                </div>
+                <div id="two-string">
+                    <div class="btn-group btn-group-toggle" role="group" id="trigon">
+                        <label class="btn btn-outline-danger button-size center">
+                            <input type="radio" name="oper" id="sin" autocomplete="off" value="sin">sin
+                        </label>
+                        <label class="btn btn-outline-danger button-size center">
+                            <input type="radio" name="oper" id="cos" autocomplete="off" value="cos">cos
+                        </label>
+                        <label class="btn btn-outline-danger button-size center">
+                            <input type="radio" name="oper" id="tan" autocomplete="off" value="tan">tan
+                        </label>
+                        <label class="btn btn-outline-danger button-size center">
+                            <input type="radio" name="oper" id="ctan" autocomplete="off" value="ctan">ctan
+                        </label>
+                        <label class="btn btn-outline-danger button-size center">
+                            <input type="radio" name="oper" id="sqrt" autocomplete="off" value="sqrt">√
+                        </label>
+                    </div>
+                    <div id="secondcolumn">
+                        <input type="reset" id="CE" value="CE" class="btn btn-outline-danger button-size">
+                        <input type="button" value="=" class="btn btn-outline-danger button-size" onclick="fun1()">
+                    </div>
+                </div>
+            </div>
+            <div id="toggle-metric" class="mt-2">
+                <h5 id="deg">DEG</h5>
+                <label class="switch" id="sw">
+                    <input type="checkbox" id="checkbox">
+                    <span class="slider" style="margin-top: -2px;"></span>
+                </label>
+                <h5 id="rad">RAD</h5>
+            </div>
+        </div>
+
+        <script>
+            $('#sw').click(function () {
+                if (!$('#checkbox').is(':checked')) {
+                    $('#deg').css({ "color": "#dc3545" });
+                    $('#rad').css({ "color": "#808080" });
+                } else {
+                    $('#rad').css({ "color": "#dc3545" });
+                    $('#deg').css({ "color": "#808080" });
+                }
+            });
+
+            $('#CE').click(function () {
+                $('#deg').css({ "color": "#dc3545" });
+                $('#rad').css({ "color": "#808080" });
+            });
+        </script>
+    </form>
+</body>
+
+</html>
